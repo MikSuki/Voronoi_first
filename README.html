@@ -1,0 +1,100 @@
+<style>
+    div {
+        font-size: 24px;
+    }
+
+    span {
+        color: #2510df;
+    }
+
+    .tab {
+        padding-left: 30px;
+    }
+</style>
+
+<hr>
+<h1>使用語言</h1>
+<hr>
+<div class='tab'>
+    javascript
+</div>
+<br><br><br><br>
+
+<!-- <hr> -->
+<!-- <h1>環境</h1> -->
+<!-- <hr> -->
+<!-- chrome://version/ page -->
+<!-- <div>
+    <span>Browser</span>&ensp; Google Chrome 96.0.4664.45 <br>
+    <span>JavaScript engine</span>&ensp; V8 9.6.180.12 <br>
+    <span>OS</span>&ensp; Windows 10 Pro 20H2 <br>
+</div> -->
+
+<hr>
+<h1>使用說明</h1>
+<hr>
+<h2>開啟方式</h2>
+<div class='tab'>
+    使用 Google Chrome 開啟 <span>index.html</span>
+    <p></p>
+</div>
+<br><br>
+
+<h2>輸入方式</h2>
+<div class='tab'>
+    <span>1. </span> 輸入分成3種，要先選對應的輸入選項按鈕才能輸出
+    <p></p>
+    <span>2. </span> 如果要產生目前畫布上頂點的Voronoi，要先換成<span>滑鼠</span>選項
+    <p></p>
+</div>
+<br><br>
+<h2>執行方式</h2>
+<div class='tab'>
+    <span>Run </span>直接建立 Voronoi
+    <p></p>
+    <span>Step by step </span> 一步一步執行
+    <p></p>
+    <span>clear </span>清空所有點
+    <p></p>
+</div>
+<br><br>
+<h2>輸出檔案</h2>
+<div class='tab'>
+    <span>download </span>下載&#60;輸出文字檔案&#62;至瀏覽器預設下載資料夾
+    <p></p>
+</div>
+
+<br><br><br><br>
+
+
+<hr>
+<h1>方法說明</h1>
+<hr>
+<h2>建立 Voronoi Diagram</h2>
+<div class='tab'>
+    <span>step.1 </span> 排序輸入的點
+    <br>
+    <span>step.2 </span> recursive 到輸入點數量 &#60;= 2，直接產生 Voronoi Diagram
+    <br>
+    <span>step.3 </span> merge 左右兩邊 Voronoi Diagram，直到完成
+    <br>
+</div>
+<br><br>
+
+<h2>Convex Hull</h2>
+<div class='tab'>
+    在建立點數量 &#60;= 2的 Voronoi Diagram 時，就記著當前 convex hull
+    <p></p>
+    所以只需要計算上下兩條切線，然後捨棄左右兩邊非 convex hull 的點
+</div>
+<br><br>
+
+<h2>Hyperplane</h2>
+<div class='tab'>
+    <span>step.1 </span> 建立 convex hull 較高之切線的中垂線 PB
+    <p></p>
+    <span>step.2 </span> 找左右兩 Voronoi 中最早碰到 PB 的邊，換新的 PB
+    <p></p>
+    <span>step.3 </span> 重複 step.2 直到抵達 convex hull 較低之切線
+</div>
+<br><br>

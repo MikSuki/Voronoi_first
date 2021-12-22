@@ -1,0 +1,54 @@
+<!-- 
+    M103040056 何承翰 Cheng-Han Ho
+    $LAN=JAVASCRIPT$
+-->
+
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/var.js"></script>
+    <script type="text/javascript" src="js/file.js"></script>
+    <script type="text/javascript" src="js/render.js"></script>
+    <script type="text/javascript" src="js/winged_edge.js"></script>
+    <script type="text/javascript" src="js/voronoi.js"></script>
+    <script type="text/javascript" src="js/event.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</header>
+
+<body style='margin: 0; padding: 0;'>
+    <canvas id='canvas' style="background: #EEEEEE;"></canvas>
+    <div class="block">
+        <h1>輸入方式</h1>
+        <label class="container">滑鼠
+            <input type="radio" checked="checked" name="radio2"
+                onclick="(()=>{ INPUT_MODE = INPUT_MODE_ENUM.mouse })();">
+            <span class="checkmark"></span>
+        </label>
+        <label class="container">輸入文字檔案
+            <input type="radio" name="radio2" onclick="(()=>{ INPUT_MODE = INPUT_MODE_ENUM.input_file })();">
+            <span class="checkmark"></span>
+        </label>
+        <input type="file" id="input_file" onclick="this.value=null;">
+        <p>
+            <label class="container">輸出文字檔案
+                <input type="radio" name="radio2" onclick="(()=>{ INPUT_MODE = INPUT_MODE_ENUM.output_file })();">
+                <span class="checkmark"></span>
+            </label>
+            <input type="file" id="output_file" onclick="this.value=null;">
+        <h1>執行方式</h1>
+        <button onclick="start(false)">Run</button>
+        <button onclick="start(true)">Step by step</button>
+        <button onclick="Voronoi.clear()">clear</button>
+        <h1>輸出檔案</h1>
+        <button onclick="downloadFile()">download</button>
+        <p id='coordinate'>x: y: </p>
+
+        <br>
+        <a href="README.html" target="_blank">說明</a>
+    </div>
+</body>
+
+</html>
