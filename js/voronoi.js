@@ -10,7 +10,7 @@ const Voronoi = {
      * @param {number} x 
      * @param {number} y 
      */
-    add: function (x, y) {
+    add: function(x, y) {
         // 重複點
         for (let i = 0; i < this.polygons.length; ++i)
             if (same(this.polygons[i], { x: x, y: y })) {
@@ -24,7 +24,7 @@ const Voronoi = {
     /**
      * 建立 Voronoi Diagram
      */
-    start: async function () {
+    start: async function() {
         FLAG.is_start = true;
         this.polygons.sort((a, b) => a.x - b.x);
         this.WE = await this.divideAndConquer(
@@ -41,14 +41,10 @@ const Voronoi = {
         FLAG.is_start = false;
     },
 
-    stop: async function () {
-
-    },
-
     /**
      * 讀取 <輸入文字檔案> 的下一個測資
      */
-    next: function () {
+    next: function() {
         let k = this.input_cnt;
         // comment
         while (BUFFER.input[k][0] == '#') {
@@ -65,8 +61,7 @@ const Voronoi = {
             }
             this.input_cnt = end;
             this.start();
-        }
-        else {
+        } else {
             console.log('end');
         }
     },
@@ -74,7 +69,7 @@ const Voronoi = {
     /**
      * 讀取 <輸出文字檔案> ，並直接顯示圖形
      */
-    readOutput: function () {
+    readOutput: function() {
         this.clear();
         let i = 0;
         const edges = [];
@@ -99,7 +94,7 @@ const Voronoi = {
     /**
      * 清除所有東西
      */
-    clear: function () {
+    clear: function() {
         this.polygons = [];
         this.WE = null;
         Main.render.clear();
@@ -112,13 +107,10 @@ const Voronoi = {
      * @param {boolean} dir 
      * @returns {WingedEdge}
      */
-    divideAndConquer: async function (start, end, dir) {
+    divideAndConquer: async function(start, end, dir) {
         if (start == end)
             return new WingedEdge(
-                [],
-                [this.polygons[start]],
-                [],
-                [this.polygons[start]],
+                [], [this.polygons[start]], [], [this.polygons[start]],
                 dir == DIR.LEFT ? COLOR.left : COLOR.right,
                 Main.render
             );
@@ -138,11 +130,13 @@ const Voronoi = {
             await waitForPause();
         }
         // draw 合併後
-        const WE = this.merge(WE_l, WE_r);
+        const { WE, HPs } = this.merge(WE_l, WE_r);
         if (FLAG.stepByStep) {
+            HPs.forEach(e => { Main.render.drawLine(e.start, e.end, COLOR.hp) })
+            await waitForPause();
             Main.render.clear();
             WE.draw(STATE.MIX);
-            await waitForPause()
+            await waitForPause();
         }
         return WE;
     },
@@ -154,7 +148,7 @@ const Voronoi = {
      * @param {boolean} dir 
      * @returns {WingedEdge}
      */
-    buildVD: function (start, end, dir) {
+    buildVD: function(start, end, dir) {
         const polygons = [this.polygons[start], this.polygons[end]],
             vertices = [],
             edges = [],
@@ -203,7 +197,7 @@ const Voronoi = {
      * @param {Array<Polygon>} poly_r 
      * @returns {Array}
      */
-    mixConvexHull: function (poly_l, poly_r) {
+    mixConvexHull: function(poly_l, poly_r) {
         // return data
         const convexHull = [];
         let lowest_l, lowest_r, highest_l, highest_r;
@@ -272,8 +266,7 @@ const Voronoi = {
                     if (dir == DIR.RIGHT) {
                         idx_l = next;
                         f_r = true;
-                    }
-                    else
+                    } else
                         f_l = false;
                     // else if (dir == DIR.LEFT)
                     //     f_l = false;
@@ -287,8 +280,7 @@ const Voronoi = {
                     if (getPtDir(poly_l[idx_l], poly_r[idx_r], poly_r[next]) == DIR.LEFT) {
                         idx_r = next;
                         f_l = true;
-                    }
-                    else
+                    } else
                         f_r = false;
                 }
             }
@@ -297,7 +289,7 @@ const Voronoi = {
         }
     },
 
-    merge: /*async*/ function (WE_l, WE_r) {
+    merge: function(WE_l, WE_r) {
         let edges = [];
         // 左右convex hull切線 和 合併後的convex hull
         let [lowest_l, lowest_r, highest_l, highest_r, convexHull] = this.mixConvexHull(WE_l.convexHull, WE_r.convexHull);
@@ -306,8 +298,7 @@ const Voronoi = {
         // hyperplane的點 和 建立中垂線的polygons
         const [intersections, polygonUsed] = this.getIntersectionsIn2WE(
             WE_l.polygons.slice(),
-            WE_r.polygons.slice(),
-            [lowest_l, lowest_r, highest_l, highest_r]
+            WE_r.polygons.slice(), [lowest_l, lowest_r, highest_l, highest_r]
         );
 
         // 點共線 or 只有一個在螢畫布外的交點
@@ -316,7 +307,8 @@ const Voronoi = {
             (intersections.length == 1 && outOfBound(intersections[0]))) {
 
             const polygons = WE_l.polygons.concat(WE_r.polygons)
-            const vertices = []
+            const vertices = [];
+            const HPs = [];
             polygons.sort((a, b) => a.y - b.y)
 
             for (let i = 1; i < polygons.length; ++i) {
@@ -325,19 +317,23 @@ const Voronoi = {
                     v2 = new Vertex(false, PB.b.x, PB.b.y, null);
                 vertices.push(v1, v2)
                 edges.push(new Edge(v1, v2, polygons[i - 1], polygons[i]))
+                HPs.push(new Edge(v1, v2, polygons[i - 1], polygons[i]))
             }
 
             // if (intersections.length == 0)
             //     convexHull = [polygons[0], polygons[polygons.length - 1]]
 
-            return new WingedEdge(
-                vertices,
-                polygons,
-                edges,
-                convexHull,
-                null,
-                Main.render,
-            )
+            return {
+                WE: new WingedEdge(
+                    vertices,
+                    polygons,
+                    edges,
+                    convexHull,
+                    null,
+                    Main.render,
+                ),
+                HPs: HPs,
+            }
         }
 
         // else 建立 HP
@@ -354,8 +350,6 @@ const Voronoi = {
             if (FLAG.draw_HP)
                 HPs.forEach(e => { Main.render.drawLine(e.start, e.end, COLOR.hp) })
         }
-
-        // await waitForPause();
 
         // 切掉兩側超過 HP 的邊
         {
@@ -400,17 +394,20 @@ const Voronoi = {
             }
         }
 
-        return new WingedEdge(
-            WE_l.vertices.concat(WE_r.vertices.concat(newVertices)),
-            WE_l.polygons.concat(WE_r.polygons),
-            edges.concat(WE_l.edges.concat(WE_r.edges.concat(HPs))),
-            convexHull,
-            getRandomColor(),
-            Main.render,
-        )
+        return {
+            WE: new WingedEdge(
+                WE_l.vertices.concat(WE_r.vertices.concat(newVertices)),
+                WE_l.polygons.concat(WE_r.polygons),
+                edges.concat(WE_l.edges.concat(WE_r.edges.concat(HPs))),
+                convexHull,
+                getRandomColor(),
+                Main.render,
+            ),
+            HPs: HPs,
+        }
     },
 
-    getIntersectionsIn2WE: function (poly_l, poly_r, lowAndHigh) {
+    getIntersectionsIn2WE: function(poly_l, poly_r, lowAndHigh) {
         const polygonUsed = [],
             intersections = [];
         const lowest_l = lowAndHigh[0],
@@ -470,7 +467,6 @@ const Voronoi = {
             lastPoly_l = start_l
             lastPoly_r = start_r
         }
-        console.log(intersections)
 
         return [intersections, polygonUsed]
 
@@ -494,14 +490,14 @@ const Voronoi = {
         }
     },
 
-    buildHP: function (intersections, polygonUsed, lowAndHigh, polys_len) {
+    buildHP: function(intersections, polygonUsed, lowAndHigh, polys_len) {
         const HP = [],
             vertices = [];
         let lowest_l, lowest_r, highest_l, highest_r;
         [lowest_l, lowest_r, highest_l, highest_r] = [lowAndHigh[0], lowAndHigh[1], lowAndHigh[2], lowAndHigh[3]];
 
         // 只會有一個交點時  (num of vertices = 3)
-        if (intersections.length == 1 /*&& polys_len == 3*/) {
+        if (intersections.length == 1 /*&& polys_len == 3*/ ) {
             const PB1 = getPB(highest_l, highest_r),
                 PB2 = getPB(lowest_l, lowest_r);
 
@@ -513,7 +509,7 @@ const Voronoi = {
             v_top2 = new Vertex(true, intersections[0].x, intersections[0].y, null)
             v_bottom1 = v_top2
             v_bottom2 = new Vertex(false, bottom.x, bottom.y, null)
-            ++v_top2.used
+                ++v_top2.used
             vertices.push(v_top1, v_top2, v_bottom2);
 
             HP.push(
@@ -528,7 +524,7 @@ const Voronoi = {
         let last;
 
         last = new Vertex(true, intersections[0].x, intersections[0].y, null)
-        --last.used
+            --last.used
 
 
         for (let i = 1; i < intersections.length; ++i) {
@@ -536,7 +532,7 @@ const Voronoi = {
 
             if (same(last, intersections[i])) {
                 cur = last
-                ++last.used
+                    ++last.used
             } else {
                 cur = new Vertex(true, intersections[i].x, intersections[i].y, null)
             }
@@ -603,7 +599,7 @@ const Voronoi = {
         }
     },
 
-    cutEdgeOverHp: function (HPs, WE, edges, dir) {
+    cutEdgeOverHp: function(HPs, WE, edges, dir) {
         for (let j = 0; j < WE.edges.length; ++j) {
             let flag = false
             const segment = WE.edges[j]
@@ -618,7 +614,7 @@ const Voronoi = {
                     else {
                         cut = new Vertex(true, cut.x, cut.y, null)
                         WE.vertices.push(cut)
-                        --cut.used
+                            --cut.used
                     }
                     if (same(cut, segment.start) || same(cut, segment.end))
                         continue
@@ -640,14 +636,14 @@ const Voronoi = {
             if (flag) {
                 edges.push(segment)
                 WE.edges.splice(j, 1)
-                --j
+                    --j
             }
         }
 
         return HPs
     },
 
-    removeEdgeOnHpOtherSide: function (HPs, WE, dir) {
+    removeEdgeOnHpOtherSide: function(HPs, WE, dir) {
         const wrongDir = [] // 在 HP 另一側的 vertices
 
         for (let i = 0; i < WE.vertices.length; ++i) {
@@ -666,7 +662,7 @@ const Voronoi = {
                 if (--WE.edges[i].end.used <= 0)
                     WE.vertices.splice(WE.vertices.indexOf(WE.edges[i].end), 1)
                 WE.edges.splice(i, 1)
-                --i
+                    --i
             }
         }
     },
@@ -674,7 +670,7 @@ const Voronoi = {
     /**
      * @returns {string} 輸入點的座標，與執行結果的所有線段
      */
-    getResult: function () {
+    getResult: function() {
         const edges = this.WE.edges;
         let result = '';
         // swap edge 的起點跟終點
@@ -719,4 +715,3 @@ const Voronoi = {
         return result;
     },
 }
-
