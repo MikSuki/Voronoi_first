@@ -6,7 +6,7 @@
  */
 function readFile(HTMLelement, isInput) {
     const fr = new FileReader();
-    fr.onload = function () {
+    fr.onload = function() {
         if (isInput)
             BUFFER.input = fr.result.split('\r\n').filter(Boolean);
         else

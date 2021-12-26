@@ -1,44 +1,105 @@
 <style>
-    div {
-        font-size: 24px;
+    body {
+        /* background-color: #f3f1f1; */
     }
-
+    
+    div {
+        font-size: 20px;
+    }
+    
     span {
         color: #2510df;
     }
-
+    
+    img {
+        border: 5px solid black;
+    }
+    
     .tab {
         padding-left: 30px;
     }
 </style>
 
+
 <hr>
+<h1>題目、系級、姓名、學號</h1>
+<hr>
+<h2>Voronoi diagram 演算法 </h2>
+<h2>資工碩一 </h2>
+<h2>何承翰 </h2>
+<h2>M103040056 </h2>
+</div>
+<p></p>
+<br><br><br><br>
+
+
+
+
+
+
+<hr>
+<h1>軟體規格書：包含「輸出與輸入（資料）規格」、「功能規格與介面規格」、「軟體測試規劃書」與其他有利於軟體開發之規格。</h1>
+<hr>
+<div class='tab'>
+    <span>輸入資料規格</span>
+    <p></p>
+    n&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;表示此組測驗中會有n個點的輸入
+    <p></p> x_1 y_1 &ensp;&ensp;&ensp;第1個點的x,y值
+    <p></p> x_2 y_2 &ensp;&ensp;&ensp;第2個點的x,y值
+    <p></p> x_3 y_3 &ensp;&ensp;&ensp;第3個點的x,y值
+    <p></p>...
+    <p></p>
+    <img src="img/input_data.png" width="600">
+
+    <p></p> <span>輸出資料規格</span>
+    <p></p>P x y &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;輸入的座標點
+    <p></p>E x1 y1 x2 y2 &ensp;&ensp;&ensp;線段：(x1, y1) 為起點，(x2, y2) 為終點，其中 x1≦x2 或 x1=x2, y1≦y2
+    <p></p>
+    <img src="img/output_data.png" width="600">
+
+    <p></p> <span>介面規格</span>
+    <p></p>
+    <img src="img/interface.png" width="800">
+
+    <p></p> <span>功能規格</span>
+    <p></p>
+    Browse...：開啟檔案
+    <p></p>
+    Run：執行到最後
+    <p></p>
+    Step：Step By Step 執行
+    <p></p>
+    clear：清除畫布
+    <p></p>
+    download：下載輸出檔案
+    <p></p>
+
+
+</div>
+
+<br><br><br><br>
+
+
+
+<!-- <hr>
 <h1>使用語言</h1>
 <hr>
 <div class='tab'>
     javascript
 </div>
-<br><br><br><br>
+<p></p>
+<p></p> -->
 
-<!-- <hr> -->
-<!-- <h1>環境</h1> -->
-<!-- <hr> -->
-<!-- chrome://version/ page -->
-<!-- <div>
-    <span>Browser</span>&ensp; Google Chrome 96.0.4664.45 <br>
-    <span>JavaScript engine</span>&ensp; V8 9.6.180.12 <br>
-    <span>OS</span>&ensp; Windows 10 Pro 20H2 <br>
-</div> -->
 
 <hr>
-<h1>使用說明</h1>
+<h1>軟體說明</h1>
 <hr>
 <h2>開啟方式</h2>
 <div class='tab'>
     使用 Google Chrome 開啟 <span>index.html</span>
     <p></p>
 </div>
-<br><br>
+<p></p>
 
 <h2>輸入方式</h2>
 <div class='tab'>
@@ -47,7 +108,7 @@
     <span>2. </span> 如果要產生目前畫布上頂點的Voronoi，要先換成<span>滑鼠</span>選項
     <p></p>
 </div>
-<br><br>
+<p></p>
 <h2>執行方式</h2>
 <div class='tab'>
     <span>Run </span>直接建立 Voronoi
@@ -57,7 +118,7 @@
     <span>clear </span>清空所有點
     <p></p>
 </div>
-<br><br>
+<p></p>
 <h2>輸出檔案</h2>
 <div class='tab'>
     <span>download </span>下載&#60;輸出文字檔案&#62;至瀏覽器預設下載資料夾
@@ -67,8 +128,15 @@
 <br><br><br><br>
 
 
+
+
+
+
+
+
+
 <hr>
-<h1>方法說明</h1>
+<h1>程式設計：將演算法於程式設計中，需要使用的資料結構，所需注意的細節或特別的技巧，在此部分講述。如果演算法有改良之處，亦在此描述。</h1>
 <hr>
 <h2>建立 Voronoi Diagram</h2>
 <div class='tab'>
@@ -79,7 +147,7 @@
     <span>step.3 </span> merge 左右兩邊 Voronoi Diagram，直到完成
     <br>
 </div>
-<br><br>
+<p></p>
 
 <h2>Convex Hull</h2>
 <div class='tab'>
@@ -87,7 +155,7 @@
     <p></p>
     所以只需要計算上下兩條切線，然後捨棄左右兩邊非 convex hull 的點
 </div>
-<br><br>
+<p></p>
 
 <h2>Hyperplane</h2>
 <div class='tab'>
@@ -97,4 +165,58 @@
     <p></p>
     <span>step.3 </span> 重複 step.2 直到抵達 convex hull 較低之切線
 </div>
-<br><br>
+<br><br><br><br>
+
+
+
+
+
+<hr>
+<h1>軟體測試與實驗結果： 軟體之測試報告。包含測試的環境、使用的電腦硬體系統（CPU型號、記憶體容量等）、作業系統、編譯器名稱及版本。 然後列出測試數據。必須列出程式可以執行之範例數據（最好列出程式可以執行之極限數據）。 如果有些情況無法執行，請列出可能原因及可能解決之道。並請提供測試時之「測試輸入檔」與「測試輸出檔」。
+</h1>
+<hr>
+<h2>測試環境</h2>
+<!-- chrome://version/ page -->
+<div>
+
+</div>
+<div class='tab'>
+    <span>Browser</span>&ensp; Google Chrome 96.0.4664.45 <br>
+    <span>JavaScript engine</span>&ensp; V8 9.6.180.12 <br>
+    <span>OS</span>&ensp; Windows 10 Pro 20H2 <br>
+    <span>CPU</span>&ensp; i7-1165G7 <br>
+    <span>Memory</span>&ensp; 16GB <br>
+
+</div>
+<br><br><br><br>
+
+
+
+
+<hr>
+<h1>結論與心得：說明所得結論、可以改良之處與心得等。</h1>
+<hr>
+<h2>心得</h2>
+<div class='tab'>
+    做完這次Term Project，我學到了使用 Divde-and-conquer 實作 Voronoi Diagram 的方法，
+    <br> 雖然這個技巧並不是有效率的解法，但還是能看出 Divde-and-conquer 比暴力硬解好很多，
+    <br> 除了演算法的部份，我也更熟悉了使用程式繪圖使用者輸入以及檔案處理
+</div>
+<h2>可改良之處</h2>
+<div class='tab'>
+    每次找hyperplane都需要和所有點比較，所以執行的效率不佳， 如果能改用課本資料結構撰寫，那麼時間複雜度會變得很漂亮～
+</div>
+<br><br><br><br>
+
+
+<hr>
+<h1>附錄：請連結「程式原始碼合併檔」、「測試輸入檔」、「測試輸出檔」等與報告相關之資料。</h1>
+<hr>
+<div class='tab'>
+    <!-- <a href="" target="_blank">程式原始碼合併檔</a> -->
+    <br>
+    <a href="輸入文字檔_無註解" target="_blank">測試輸入檔</a>
+    <br>
+    <a href="輸出檔案A" target="_blank">測試輸出檔</a>
+</div>
+<br><br><br><br>
