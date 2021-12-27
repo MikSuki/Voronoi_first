@@ -2,20 +2,20 @@
     body {
         /* background-color: #f3f1f1; */
     }
-
+    
     div {
         font-size: 20px;
     }
-
+    
     span {
         color: #2510df;
     }
-
+    
     img {
         border: 3px solid black;
         border-radius: 5px;
     }
-
+    
     .tab {
         padding-left: 30px;
         padding-right: 200px;
@@ -26,10 +26,8 @@
 <hr>
 <h1>題目、系級、姓名、學號</h1>
 <hr>
-<h2>Voronoi diagram 演算法 </h2>
-<h2>資工碩一 </h2>
-<h2>何承翰 </h2>
-<h2>M103040056 </h2>
+<div class='tab'>
+    Voronoi diagram 演算法 <br> 資工碩一 <br> 何承翰 <br> M103040056 <br>
 </div>
 <p></p>
 <br><br><br><br>
@@ -40,7 +38,7 @@
 
 
 <hr>
-<h1>軟體規格書</h1>
+<h1>軟體規格</h1>
 <hr>
 <div class='tab'>
     <span>輸入</span>
@@ -55,13 +53,13 @@
 
     <p></p> <span>輸出</span>
     <p></p>
-    1. 按下 download，產生「輸出文字檔」
-    <br>
+    按下 download，產生「輸出文字檔」
+    <br><br>
 
     <p></p> <span>介面</span>
     <p></p>
     <img src="img/interface.png" width="800">
-    <br>
+    <br><br>
 
     <p></p> <span>功能</span>
     <p></p>
@@ -77,11 +75,12 @@
     <p></p>
     <br>
 
-    <p></p> <span>軟體測試規劃書</span>
+    <p></p> <span>軟體測試規劃</span>
     <p></p>
-    共線: 3點共線、4點矩形
+    1. 共線: 3點共線、4點矩形
     <p></p>
-    隨意測試: 5點以上
+    2. 多點測試: 5、12、15、20、30、50點
+
 
 </div>
 
@@ -144,8 +143,16 @@
 
 
 <hr>
-<h1>程式設計：將演算法於程式設計中，需要使用的資料結構，所需注意的細節或特別的技巧，在此部分講述。如果演算法有改良之處，亦在此描述。</h1>
+<h1>程式設計</h1>
 <hr>
+<h2>資料結構</h2>
+<div class='tab'>
+    <span>Point</span> 儲存 x, y 值
+    <br>
+    <span>Edge </span> 儲存起點和終點
+    <br>
+</div>
+<br>
 <h2>建立 Voronoi Diagram</h2>
 <div class='tab'>
     <span>step.1 </span> 排序輸入的點
@@ -155,7 +162,7 @@
     <span>step.3 </span> merge 左右兩邊 Voronoi Diagram，直到完成
     <br>
 </div>
-<p></p>
+<br>
 
 <h2>Convex Hull</h2>
 <div class='tab'>
@@ -163,7 +170,7 @@
     <p></p>
     所以只需要計算上下兩條切線，然後捨棄左右兩邊非 convex hull 的點
 </div>
-<p></p>
+<br>
 
 <h2>Hyperplane</h2>
 <div class='tab'>
@@ -216,6 +223,10 @@
     <br><span>15點</span><br>
     <img src="img/15.png" width="800">
     <br>
+    <br>
+    <br><span>20點</span><br>
+    <img src="img/20.png" width="800">
+    <br>
     <br><span>30點</span><br>
     <img src="img/30.png" width="800">
     <br>
@@ -227,29 +238,25 @@
 
 
 <hr>
-<h1>結論與心得：說明所得結論、可以改良之處與心得等。</h1>
+<h1>結論與心得</h1>
 <hr>
-<h2>心得</h2>
 <div class='tab'>
-    做完這次Term Project，我學到了使用 Divde-and-conquer 實作 Voronoi Diagram 的方法，
-    <br> 雖然這個技巧並不是有效率的解法，但還是能看出 Divde-and-conquer 比暴力硬解好很多，
-    <br> 除了演算法的部份，我也更熟悉了使用程式繪圖使用者輸入以及檔案處理
-</div>
-<h2>可改良之處</h2>
-<div class='tab'>
-    每次找hyperplane都需要和所有點比較，所以執行的效率不佳， 如果能改用課本資料結構撰寫，那麼時間複雜度會變得很漂亮～
+    做完這個Term Project， 不只學到了使用 Divde-and-conquer 實作 Voronoi Diagram 的方法， 而且也更熟悉了 JavaScript 繪圖、事件監聽以及檔案處理的功能， 雖然 Divde-and-conquer 並不是最有效率的解法， 但比起完全暴力硬解，Divde-and-conquer 還是好很多， 因為 Voronoi 只會和鄰近的點建立中垂線， 一開始先分割成多組資料，就可以省掉很多不必要的比較。 最後，這次作業還能改進的地方是： 因為沒有記錄足夠資訊，每次找
+    hyperplane 時，左右某一邊的所有點都需要看過一遍，因此執行效率不佳， 如果能改用講義的資料結構撰寫，那麼時間複雜度會變得很漂亮～
+
 </div>
 <br><br><br><br>
 
 
 <hr>
-<h1>附錄：請連結「程式原始碼合併檔」、「測試輸入檔」、「測試輸出檔」等與報告相關之資料。</h1>
+<h1>附錄</h1>
 <hr>
 <div class='tab'>
-    <!-- <a href="" target="_blank">程式原始碼合併檔</a> -->
     <br>
-    <a href="輸入文字檔_無註解" target="_blank">測試輸入檔</a>
-    <br>
-    <a href="輸出檔案A" target="_blank">測試輸出檔</a>
+    <a href="程式原始碼合併檔.js" target="_blank">程式原始碼合併檔</a>
+    <br><br>
+    <a href="測試輸入檔" target="_blank">測試輸入檔</a>
+    <br><br>
+    <a href="測試輸出檔" target="_blank">測試輸出檔</a>
 </div>
 <br><br><br><br>

@@ -1,15 +1,13 @@
-結論
-使用 Divde-and-conquer 實作 Voronoi 並不是最有效率的解法，
+做完這個Term Project，
+不只學到了使用 Divde-and-conquer 實作 Voronoi Diagram 的方法，
+而且也更熟悉了 JavaScript 繪圖、事件監聽以及檔案處理的功能，
+
+雖然 Divde-and-conquer 並不是最有效率的解法，
 但比起完全暴力硬解，Divde-and-conquer 還是好很多，
 因為 Voronoi 只會和鄰近的點建立中垂線，
-藉由一開始先分割成多組資料，就可以省掉很多不必要的比較。
+一開始先分割成多組資料，就可以省掉很多不必要的比較。
 
-
-
-心得
-做完這次Term Project，
-除了學到使用 Divde-and-conquer 實作 Voronoi Diagram 的方法，
-也更熟悉了 JavaScript 繪圖、使用者輸入以及檔案處理的功能，
-
-
+最後，這次作業還能改進的地方是：
+因為沒有記錄足夠資訊，每次找 hyperplane 時，左右某一邊的所有點都需要看過一遍，因此執行效率不佳， 
+如果能改用講義的資料結構撰寫，那麼時間複雜度會變得很漂亮～
 
