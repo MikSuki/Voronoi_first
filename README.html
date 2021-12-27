@@ -2,21 +2,23 @@
     body {
         /* background-color: #f3f1f1; */
     }
-    
+
     div {
         font-size: 20px;
     }
-    
+
     span {
         color: #2510df;
     }
-    
+
     img {
-        border: 5px solid black;
+        border: 3px solid black;
+        border-radius: 5px;
     }
-    
+
     .tab {
         padding-left: 30px;
+        padding-right: 200px;
     }
 </style>
 
@@ -38,30 +40,30 @@
 
 
 <hr>
-<h1>軟體規格書：包含「輸出與輸入（資料）規格」、「功能規格與介面規格」、「軟體測試規劃書」與其他有利於軟體開發之規格。</h1>
+<h1>軟體規格書</h1>
 <hr>
 <div class='tab'>
-    <span>輸入資料規格</span>
+    <span>輸入</span>
     <p></p>
-    n&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;表示此組測驗中會有n個點的輸入
-    <p></p> x_1 y_1 &ensp;&ensp;&ensp;第1個點的x,y值
-    <p></p> x_2 y_2 &ensp;&ensp;&ensp;第2個點的x,y值
-    <p></p> x_3 y_3 &ensp;&ensp;&ensp;第3個點的x,y值
-    <p></p>...
+    1. 在畫布上任意點擊
     <p></p>
-    <img src="img/input_data.png" width="600">
+    2. 讀取「輸入文字檔」
+    <p></p>
+    3. 讀取「輸出文字檔」
+    <p></p>
+    <br>
 
-    <p></p> <span>輸出資料規格</span>
-    <p></p>P x y &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;輸入的座標點
-    <p></p>E x1 y1 x2 y2 &ensp;&ensp;&ensp;線段：(x1, y1) 為起點，(x2, y2) 為終點，其中 x1≦x2 或 x1=x2, y1≦y2
+    <p></p> <span>輸出</span>
     <p></p>
-    <img src="img/output_data.png" width="600">
+    1. 按下 download，產生「輸出文字檔」
+    <br>
 
-    <p></p> <span>介面規格</span>
+    <p></p> <span>介面</span>
     <p></p>
     <img src="img/interface.png" width="800">
+    <br>
 
-    <p></p> <span>功能規格</span>
+    <p></p> <span>功能</span>
     <p></p>
     Browse...：開啟檔案
     <p></p>
@@ -73,7 +75,13 @@
     <p></p>
     download：下載輸出檔案
     <p></p>
+    <br>
 
+    <p></p> <span>軟體測試規劃書</span>
+    <p></p>
+    共線: 3點共線、4點矩形
+    <p></p>
+    隨意測試: 5點以上
 
 </div>
 
@@ -172,8 +180,7 @@
 
 
 <hr>
-<h1>軟體測試與實驗結果： 軟體之測試報告。包含測試的環境、使用的電腦硬體系統（CPU型號、記憶體容量等）、作業系統、編譯器名稱及版本。 然後列出測試數據。必須列出程式可以執行之範例數據（最好列出程式可以執行之極限數據）。 如果有些情況無法執行，請列出可能原因及可能解決之道。並請提供測試時之「測試輸入檔」與「測試輸出檔」。
-</h1>
+<h1>軟體測試與實驗結果</h1>
 <hr>
 <h2>測試環境</h2>
 <!-- chrome://version/ page -->
@@ -181,11 +188,37 @@
 
 </div>
 <div class='tab'>
-    <span>Browser</span>&ensp; Google Chrome 96.0.4664.45 <br>
-    <span>JavaScript engine</span>&ensp; V8 9.6.180.12 <br>
+    <span>Language</span>&ensp; JavaScript <br>
+    <span>Browser</span>&ensp; Google Chrome 96.0.4664.110 <br>
+    <span>JavaScript engine</span>&ensp; V8 9.6.180.21 <br><br>
+    <img src="img/chrome.png" width="800"><br><br>
     <span>OS</span>&ensp; Windows 10 Pro 20H2 <br>
     <span>CPU</span>&ensp; i7-1165G7 <br>
-    <span>Memory</span>&ensp; 16GB <br>
+    <span>Memory</span>&ensp; 16GB <br><br>
+    <img src="img/pc.png" width="800"><br>
+    <br>
+</div>
+<h2>實驗結果</h2>
+<p></p>
+<div class='tab'>
+    <br><span>3點</span><br>
+    <img src="img/3.png" width="800">
+    <br>
+    <br><span>4點</span><br>
+    <img src="img/4.png" width="800">
+    <br>
+    <br><span>5點</span><br>
+    <img src="img/5.png" width="800">
+    <br>
+    <br><span>12點</span><br>
+    <img src="img/12.png" width="800">
+    <br>
+    <br><span>15點</span><br>
+    <img src="img/15.png" width="800">
+    <br>
+    <br><span>30點</span><br>
+    <img src="img/30.png" width="800">
+    <br>
 
 </div>
 <br><br><br><br>
